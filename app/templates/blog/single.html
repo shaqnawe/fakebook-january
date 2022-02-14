@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <a href="{{ url_for('home') }}">Back</a>
+    <li class="list-group-item unique-list">
+        <p>
+            {{ post.body }}
+            <span class="float-right">
+                <small>2 seconds ago</small>
+            </span>
+        </p>
+        <cite>
+            <!-- can access data being passed into a template using either dot notation, or literal notation -->
+            &mdash; {{ post.user.first_name }} {{ post.user.last_name }}
+            {# &mdash; {{ user['first_name'] }} {{ user['last_name'] }} #}
+        </cite>
+    </li>
+{% endblock %}
