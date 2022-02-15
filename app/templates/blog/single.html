@@ -6,7 +6,7 @@
         <p>
             {{ post.body }}
             <span class="float-right">
-                <small>2 seconds ago</small>
+                <small>{{ moment(post.date_created).fromNow() }}</small>
             </span>
         </p>
         <cite>
