@@ -1,7 +1,7 @@
-from crypt import methods
-from app import app, db
-from flask import render_template, request, redirect, url_for
-from .models import User, Post
+from flask import request, render_template, redirect, url_for
+from app import db
+from .import bp as app
+from .models import Post
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -19,7 +19,7 @@ def home():
     return render_template('home.html', **context)
     # return render_template('home.html', user=user, post=post)ren
 
-@app.route('/blog/<id>')
+@app.route('/<id>')
 def blog_single(id):
     # for p in Post.query.all():
     #     if p['id'] == int(id):
@@ -30,11 +30,3 @@ def blog_single(id):
         'post': post
     }
     return render_template('blog/single.html', **context)
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')

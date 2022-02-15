@@ -2,18 +2,30 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_moment import Moment
-
 from config import Config
 
-app = Flask(__name__)
-app.config.from_object(Config)
+db = SQLAlchemy()
+migrate = Migrate()
+moment = Moment()
 
-# ORM - Object Relational Mapper - flask-sqlalchemy
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-moment = Moment(app)
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
 
-from .import routes, models
+    # ORM - Object Relational Mapper - flask-sqlalchemy
+    db.init_app(app)
+    migrate.init_app(app, db)
+    moment.init_app(app)
+
+    # Register the blueprints
+    from app.blueprints.blog import bp as blog
+    from app.blueprints.main import bp as main
+    from app.blueprints.api import bp as api
+    app.register_blueprint(blog)
+    app.register_blueprint(main)
+    app.register_blueprint(api)
+
+    return app
 
 # C - POST
 # R - GET

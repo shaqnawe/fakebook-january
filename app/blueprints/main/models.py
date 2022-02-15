@@ -8,16 +8,15 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(255))
     posts = db.relationship('Post', backref='user', lazy='dynamic')
-    
+
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email
+        }
+        return data    
 
     def __repr__(self):
         return f'<User: {self.email}>'
-
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.Text)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return f'<Post: {self.body[:10]}...>'
