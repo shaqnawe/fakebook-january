@@ -1,3 +1,5 @@
 venv
 virtualenv
 .env
+*.pyc
+__pycache__

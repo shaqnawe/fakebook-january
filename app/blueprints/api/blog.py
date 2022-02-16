@@ -1,25 +1,25 @@
-from flask import request, jsonify
+from flask import request , jsonify
 from app.blueprints.blog.models import Post
 from app import db
 
 from .import bp as api
 
 @api.route('/blog')
-def get_posts():
+def all():
     '''
     [GET] /api/v1/blog
     '''
     return jsonify([p.to_dict() for p in Post.query.all()])
 
 @api.route('/blog/<id>')
-def get_post(id):
+def retrieve(id):
     '''
     [GET] /api/v1/blog/<id>
     '''
     return jsonify(Post.query.get(id).to_dict())
 
 @api.route('/blog', methods=['POST'])
-def create_post():
+def create():
     '''
     [POST] /api/v1/blog
     '''
@@ -35,7 +35,7 @@ def create_post():
 
 
 @api.route('/blog/<id>', methods=['PUT'])
-def update_post(id):
+def update(id):
     '''
     [PUT] /api/v1/blog/<id>
     '''
@@ -50,7 +50,7 @@ def update_post(id):
     return jsonify(p.to_dict())
 
 @api.route('/blog/<id>', methods=['DELETE'])
-def delete_post(id):
+def delete(id):
     '''
     [DELETE] /api/v1/blog/<id>
     '''
