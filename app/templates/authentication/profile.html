@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>Profile</h1>
+
+<hr>
+
+<div class="row">
+    <div class="col-6">
+        <img src="https://via.placeholder.com/700x700" class="img-fluid" alt="">
+    </div>
+    <div class="col-6">
+        <form action="{{ url_for('authentication.profile') }}" method="POST">
+        
+            <div class="form-group">
+                <input type="text" class="form-control" value="{{ current_user.first_name }}" name="first_name" placeholder="First Name" />
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" value="{{ current_user.last_name }}" name="last_name" placeholder="Last Name" />
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" value="{{ current_user.email }}" name="email" placeholder="Email" />
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password" />
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password2" placeholder="Confirm Password" />
+            </div>
+            <input type="submit" value="Update" class="btn btn-info btn-block" />
+        
+        </form>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        
+        {% for post in posts %}
+        <li class="list-group-item unique-list profile-posts">
+            <p>
+                <a href="{{ url_for('blog.blog_single', id=post.id) }}">
+                    {{ post.body }}
+                </a>
+                <span class="float-right">
+                    <small>{{ moment(post.date_created).fromNow() }}</small>
+                </span>
+            </p>
+            <cite>
+                <!-- can access data being passed into a template using either dot notation, or literal notation -->
+                &mdash; {{ post.user.first_name }} {{ post.user.last_name }}
+                {# &mdash; {{ user['first_name'] }} {{ user['last_name'] }} #}
+            </cite>
+        </li>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
