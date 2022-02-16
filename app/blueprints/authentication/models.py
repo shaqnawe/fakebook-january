@@ -11,7 +11,8 @@ class User(db.Model, UserMixin):
     posts = db.relationship('Post', backref='user', lazy='dynamic')
     password = db.Column(db.String(255))
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.generate_password(self.password)
         # self.password = generate_password_hash(self.password)
 

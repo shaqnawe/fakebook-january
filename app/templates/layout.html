@@ -13,37 +13,7 @@
     <body>
         <div>
             <header>
-                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                    <a class="navbar-brand" href="{{ url_for('blog.home') }}">Fakebook</a>
-                    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="collapsibleNavId">
-                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="{{ url_for('blog.home') }}">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('main.contact') }}">Contact</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                    <a class="dropdown-item" href="#">Action 1</a>
-                                    <a class="dropdown-item" href="#">Action 2</a>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item"><a href="{{ url_for('authentication.login') }}" class="nav-link">Login</a></li>
-                            <li class="nav-item"><a href="{{ url_for('authentication.register') }}" class="nav-link">Register</a></li>
-                        </ul>
-                    </div>
-                </nav>
+                {% include './modules/navigation.html' %}
             </header>
 
             <main class="container">
@@ -67,39 +37,8 @@
             </main>
         </div>
 
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-4 text-white">
-                        <p>123 Sunny Ln</p>
-                        <p>Sunnyville, CA 90210</p>
-                        <p>(555) 555-5555</p>
-                    </div>
-                    <div class="col-4">
-                        <ul class="list-unstyled">
-                            <li>
-                                <a class="text-white" href="#">Home</a>
-                            </li>
-                            <li>
-                                <a class="text-white" href="#">About</a>
-                            </li>
-                            <li>
-                                <a class="text-white" href="#">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-4">
-                        <form action="">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Subscribe to our mailing list">
-                            </div>
-                            <input type="submit" class="btn btn-warning" value="Subscribe" />
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- <h1>Home Page</h1> -->
+        {% include './modules/footer.html' %}
+
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
