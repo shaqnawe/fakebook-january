@@ -30,6 +30,11 @@ def create_app(config_class=Config):
     app.register_blueprint(api)
     app.register_blueprint(authentication)
 
+    with app.app_context():
+        from app.blueprints.ecommerce import bp as ecommerce
+        app.register_blueprint(ecommerce)
+        # from app.blueprints.ecommerce import routes
+
     return app
 
 # C - POST

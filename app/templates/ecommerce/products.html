@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="row">
+        {% for p in products %}
+            <div class="card col-4">
+                <img class="card-img-top" src="{{ p.image }}" alt="{{ p.name }}">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ p.name }}
+                        <span class="float-right">{{ '${}'.format(p.price) }}</span>
+                    </h4>
+                    <p class="card-text">{{ p.description }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('ecommerce.add_product', id=p.id) }}" class="btn btn-block btn-success">Add To Cart</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
