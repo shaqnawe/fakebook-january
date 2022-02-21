@@ -40,6 +40,26 @@ def add_product(id):
     flash(f'Product added to cart successfully', 'success')
     return redirect(url_for('ecommerce.products'))
 
+@app.route('/products/cart/<id>')
+def remove_product(id):
+    # if the cart item exists inside of our cart_dict
+    cart_item = Cart.query.filter_by(product_id=str(id)).filter_by(user_id=current_user.id).first()
+    db.session.delete(cart_item)
+    db.session.commit()
+    flash(f'Product removed from the cart.', 'success')
+
+    return redirect(url_for('ecommerce.cart'))
+
+@app.route('/products/cart', methods=['POST'])
+def update_cart():
+    if request.method == 'POST':
+        qtychanged = request.form.get('quantity')
+        cart_item = Cart.query.filter_by(product_id=str(id)).filter_by(user_id=current_user.id).first()
+        cart_item.quantity = qtychanged
+        db.session.commit()
+        flash(f'Shopping cart updated', 'success')
+    return redirect(url_for('ecommerce.cart'))
+
 @app.route('/products/cart')
 def cart():
     cart_items = []
@@ -51,8 +71,14 @@ def cart():
             'quantity': item.quantity
         }
         cart_items.append(product_dict)
+    grand_total = 0
+    if cart_items:
+        for item in cart_items:
+            grand_total +=  item['price']*item['quantity']
+    
     context = {
-        'cart': cart_items
+        'cart': cart_items,
+        'grand_total': (grand_total)
     }
     return render_template('ecommerce/cart.html', **context)
 
