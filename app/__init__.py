@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_moment import Moment
 from config import Config
 from flask_login import LoginManager
+from flask_cors import CORS
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -33,6 +34,9 @@ def create_app(config_class=Config):
     with app.app_context():
         from app.blueprints.ecommerce import bp as ecommerce
         app.register_blueprint(ecommerce)
+
+        from app.blueprints.api import bp as api
+        app.register_blueprint(api)
         # from app.blueprints.ecommerce import routes
 
     return app
